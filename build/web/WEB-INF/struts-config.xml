@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+
+-->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="Form1" type="Model.Form1">
+        
+            <form-property name="codeCLient" type="java.lang.String"></form-property>
+            <form-property name="nomClient" type="java.lang.String"></form-property>
+            <form-property name="adresseClient" type="java.lang.String"></form-property>
+        
+        </form-bean>
+        <form-bean name="Form2" type="Model.Form2">
+            
+            
+            <form-property name="numCompte" type="java.lang.Integer"></form-property>
+            <form-property name="dateCreation" type="java.sql.Timestamp"></form-property>
+            <form-property name="solde" type="java.lang.Double"></form-property>
+              <form-property name="codeCLient" type="java.lang.String"></form-property>
+            
+        </form-bean>
+        <form-bean name="Form3" type="Model.Form3">
+            
+            
+           <form-property name="codeCLient" type="java.lang.String"></form-property>
+                
+                       
+            <form-property name="numCompte" type="java.lang.Integer"></form-property>
+            <form-property name="solde" type="java.lang.Double"></form-property>
+                
+                
+            
+            
+        </form-bean>
+        <form-bean name="Form4" type="Model.Form4">
+            
+             <form-property name="codeCLient" type="java.lang.String"></form-property>
+            <form-property name="nomClient" type="java.lang.String"></form-property>
+            <form-property name="adresseClient" type="java.lang.String"></form-property>
+          
+            
+            
+        </form-bean>
+        <form-bean name="Form5" type="Model.Form5">
+            
+               <form-property name="numOperation" type="java.lang.Integer"></form-property>
+                <form-property name="numCompte" type="java.lang.Integer"></form-property>
+                  <form-property name="DateOperation" type="java.sql.Timestamp"></form-property>
+                  <form-property name="montantMv" type="java.lang.Double"></form-property>
+                     <form-property name="mouvement" type="java.lang.String"></form-property>
+                  
+              
+            
+            
+            
+        </form-bean>
+        <form-bean name="Form6" type="Model.Form6">
+            
+            
+            <form-property name="numOperation" type="java.lang.Integer"></form-property>
+                <form-property name="numCompte" type="java.lang.Integer"></form-property>
+                  <form-property name="DateOperation" type="java.sql.Timestamp"></form-property>
+                  <form-property name="montantMv" type="java.lang.Double"></form-property>
+                     <form-property name="mouvement" type="java.lang.String"></form-property>
+            
+            
+        </form-bean>
+            
+    </form-beans>
+     
+   <global-exceptions>
+        <exception  type="java.sql.SQLIntegrityConstraintViolationException"
+                    key="dbfailure"
+                    path="/dbfailure.jsp"
+                    handler="org.apache.struts.action.ExceptionHandler"/>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="success"  path="/index.jsp"/>
+        
+         <forward name="success1"  path="/ListeAdherent.jsp"/>
+         <forward name="success3"  path="/index.jsp"/>
+        
+         <forward name="success4"  path="/ResultSearchCompte.jsp"/>
+            <forward name="success5"  path="/ResultSearchClient.jsp"/>
+                   <forward name="success6"  path="/index.jsp"/>
+                      <forward name="success7"  path="/AfficherListe.jsp"/>
+                   
+    </global-forwards>
+
+    <action-mappings>
+        <action input="/ListeOperation.jsp" name="Form6" path="/chercheroperation" scope="session" type="Controller.ActionChercherOperation"/>
+        <action input="/AjouterOperation.jsp" name="Form5" path="/ajouteroperation" scope="session" type="Controller.ActionAjouterOperation"/>
+        <action input="/ChercherClient.jsp" name="Form4" path="/chercherclient" scope="session" type="Controller.ActionChercherClient"/>
+        <action input="/ChercherCompte.jsp" name="Form3" path="/cherchercompte" scope="session" type="Controller.ChercherCompte"/>
+        <action input="/index.jsp" name="Form1" path="/numcompte" scope="session" type="Controller.ChercherCompe"/>
+            <action input="/AjouterCompte.jsp" name="Form2" path="/ajoutercompte" scope="session" type="Controller.AjouterCompte"/>
+        <action input="/index.jsp" name="Form1" path="/listeAdher" scope="session" type="Controller.ActionListeAdherent"/>
+                <action input="/AjoutAdherent.jsp" name="Form1" path="/ajoutadherent" scope="session" type="Controller.ActionAJoutAdherent"/>
+    
+        <action path="/Welcome"     forward="welcomeStruts.jsp"/>
+        
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
